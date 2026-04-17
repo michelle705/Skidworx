@@ -138,6 +138,7 @@
       opacity:0.9;
       line-height:1;
     }
+    @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.6)}}
     .logo-services{
       font-size:clamp(0.62rem,1.3vw,0.78rem);
       color:rgba(255,255,255,0.65);
@@ -146,8 +147,20 @@
       border-top:1px solid rgba(255,255,255,0.08);
       padding-top:12px;
       margin-top:4px;
+      text-align:center;
     }
-    .logo-services .dot{color:var(--g);margin:0 10px;font-size:0.6em;vertical-align:middle}
+    .logo-services .dot{
+      color:var(--g);
+      margin:0 8px;
+      font-size:0.55em;
+      vertical-align:middle;
+      display:inline-block;
+      animation:pulse-dot 1.4s ease-in-out infinite;
+    }
+    .logo-services .dot:nth-child(2){animation-delay:0.35s}
+    .logo-services .dot:nth-child(4){animation-delay:0.7s}
+    .logo-services .dot:nth-child(6){animation-delay:1.05s}
+    .logo-services .dot:nth-child(8){animation-delay:1.4s}
 
     .btn-cta{background:var(--g);color:#000;padding:20px 50px;text-decoration:none;font-weight:900;text-transform:uppercase;letter-spacing:2px;font-size:1.1rem;transition:0.3s cubic-bezier(.175,.885,.32,1.275);display:inline-block;box-shadow:0 10px 30px rgba(68,182,81,0.4);border-radius:3px}
     .btn-cta:hover{transform:translateY(-5px);background:#fff;box-shadow:0 15px 40px rgba(255,255,255,0.2)}
@@ -273,12 +286,7 @@
       <div class="logo-wordmark">
         <span class="logo-main">SKIDWORX</span><span class="logo-llc">LLC</span>
       </div>
-      <div class="logo-services">
-        Forestry Mulching <span class="dot">&#9679;</span>
-        Stump Removal <span class="dot">&#9679;</span>
-        Forestry Mowing <span class="dot">&#9679;</span>
-        Debris Removal
-      </div>
+      <div class="logo-services">Forestry Mulching <span class="dot">&#9679;</span> Stump Removal <span class="dot">&#9679;</span><br>Forestry Mowing <span class="dot">&#9679;</span> Debris Removal <span class="dot">&#9679;</span></div>
     </div>
     <a href="tel:3522066203" class="btn-cta">Request a Free Estimate</a>
   </header>
