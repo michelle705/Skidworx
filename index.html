@@ -463,5 +463,18 @@
     </div>
   </footer>
 
+  <script>
+    // JS parallax for mobile (background-attachment:fixed is ignored by mobile browsers)
+    if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+      var hero = document.querySelector('.hero');
+      if (hero) {
+        window.addEventListener('scroll', function() {
+          var scrolled = window.pageYOffset;
+          hero.style.backgroundPosition = 'center ' + (scrolled * 0.4) + 'px';
+        }, { passive: true });
+      }
+    }
+  </script>
+
 </body>
 </html>
