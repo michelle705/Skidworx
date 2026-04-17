@@ -24,6 +24,9 @@
   <nav>
     <div class="container nav-flex">
       <a href="index.html" class="logo">SKIDWORX LLC</a>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="skidworx-forestry-mulching.html">Forestry Mulching</a>
@@ -74,5 +77,24 @@
       <p class="footer-copy">&copy; 2026 SkidWorx LLC. All rights reserved. San Antonio, FL.</p>
     </div>
   </footer>
+  <script>
+    var hamburger = document.querySelector('.nav-hamburger');
+    var navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function() {
+        var open = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+      });
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', false);
+        });
+      });
+    }
+  </script>
+
 </body>
 </html>

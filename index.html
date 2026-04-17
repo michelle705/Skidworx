@@ -228,7 +228,7 @@
       .nav-links a{margin-left:0;font-size:0.72rem;padding:7px 9px}
       .nav-links a.cta-link{margin-left:0}
       section{padding:75px 0}
-      .hero{padding-top:230px!important}
+      .hero{padding-top:90px!important}
       .brand-box{padding:14px 20px;max-width:88vw;margin-bottom:12px}
       .logo-main{font-size:clamp(2rem,12vw,3rem)!important}
       .logo-llc{font-size:clamp(0.85rem,4.5vw,1.3rem)!important}
@@ -245,6 +245,9 @@
   <nav>
     <div class="container nav-flex">
       <a href="index.html" class="logo">SKIDWORX LLC</a>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <div class="nav-links">
         <a href="index.html" class="active">Home</a>
         <a href="skidworx-forestry-mulching.html">Forestry Mulching</a>
@@ -464,6 +467,25 @@
   </footer>
 
   <script>
+    // Hamburger menu toggle
+    var hamburger = document.querySelector('.nav-hamburger');
+    var navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function() {
+        var open = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+      });
+      // Close menu when a link is clicked
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', false);
+        });
+      });
+    }
+
     // JS parallax for mobile (background-attachment:fixed is ignored by mobile browsers)
     if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
       var hero = document.querySelector('.hero');
