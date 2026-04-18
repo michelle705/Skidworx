@@ -2,8 +2,74 @@ html {
   scroll-padding-top: 140px;
 }
 
-body {
+html, body {
   overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* ─── Prevent pseudo-element blobs from causing horizontal scroll ─────────── */
+.page-hero,
+.cta-banner,
+.hero {
+  overflow: hidden;
+}
+
+/* ─── Mobile: fix common layout overflow issues ──────────────────────────── */
+@media (max-width: 768px) {
+  /* Tables scroll horizontally instead of breaking layout */
+  .vs-table,
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  /* Two-column grids collapse to single column */
+  .split,
+  .two-col,
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Buttons stack and fill width */
+  .hero-ctas,
+  .btn-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .hero-ctas .btn,
+  .hero-ctas a {
+    text-align: center !important;
+  }
+
+  /* Section padding tighter on mobile */
+  section {
+    padding: 60px 0 !important;
+  }
+
+  .page-hero {
+    padding: 100px 0 60px !important;
+  }
+
+  /* Container doesn't overflow */
+  .container {
+    padding: 0 18px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Page hero h1 doesn't overflow */
+  .page-hero h1 {
+    font-size: clamp(2.2rem, 10vw, 4rem) !important;
+    word-break: break-word;
+  }
+
+  /* CTA banner padding */
+  .cta-banner {
+    padding: 60px 0 !important;
+  }
 }
 
 /* ─── Main nav only (direct child of body) ─────────────────────────────── */
@@ -196,8 +262,12 @@ footer nav,
   }
 
   body > nav .logo {
-    font-size: 1.3rem !important;
+    font-size: 1.1rem !important;
     flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
   }
 
   .nav-hamburger {
@@ -277,4 +347,204 @@ footer nav,
   .page-hero {
     padding-top: 80px !important;
   }
+}
+
+/* ─── Typography enhancements ────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+/* ─── Touch & interaction ─────────────────────────────────────────────────── */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── Focus visible (keyboard navigation) ────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #44b651;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Transition fix: no transition:all anti-pattern ─────────────────────── */
+/* Overridden per-file; this is a safe base for global elements */
+body > nav .nav-links a {
+  transition: background-color 0.25s ease, color 0.25s ease !important;
+}
+
+/* ─── Reduced motion support ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Stats bar ──────────────────────────────────────────────────────────── */
+.stats-bar {
+  background: #0d0d0d;
+  border-top: 1px solid rgba(68, 182, 81, 0.18);
+  border-bottom: 1px solid rgba(68, 182, 81, 0.18);
+  padding: 32px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  color: #44b651;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-desc {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 16px;
+  }
+}
+
+/* ─── Image divider section ──────────────────────────────────────────────── */
+.img-divider {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 110px 0;
+  text-align: center;
+}
+
+.img-divider::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.img-divider-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.img-divider-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #44b651;
+  margin-bottom: 16px;
+}
+
+.img-divider h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  margin-bottom: 28px;
+  color: #fff;
+}
+
+.img-divider h2 span {
+  color: #44b651;
+}
+
+@media (max-width: 768px) {
+  .img-divider {
+    background-attachment: scroll;
+    padding: 70px 0;
+  }
+}
+
+/* ─── Service card image layout (homepage) ───────────────────────────────── */
+.svc-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  border-radius: 3px 3px 0 0;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .svc-img {
+  transform: scale(1.04);
+}
+
+.svc-body {
+  padding: 28px;
+}
+
+/* ─── Location card image layout (homepage) ──────────────────────────────── */
+.loc-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  border-radius: 3px 3px 0 0;
+  transition: transform 0.4s ease;
+}
+
+.location-card:hover .loc-img {
+  transform: scale(1.04);
+}
+
+.loc-body {
+  padding: 22px 24px;
+}
+
+/* ─── Location page feature image ────────────────────────────────────────── */
+.location-feature-img {
+  width: 100%;
+  display: block;
+}
+
+.location-feature-img img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── SVG icon in CTA phone link ─────────────────────────────────────────── */
+.cta-icon {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+.cta-icon svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+body > nav .nav-links a.cta-link .cta-icon svg {
+  stroke: #f97316; /* orange */
 }
