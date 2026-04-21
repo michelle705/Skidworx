@@ -7,6 +7,24 @@ html, body {
   max-width: 100%;
 }
 
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 9999;
+  background: #44b651;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 3px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  top: 16px;
+}
+
 /* ─── Prevent pseudo-element blobs from causing horizontal scroll ─────────── */
 .page-hero,
 .cta-banner,
@@ -112,7 +130,7 @@ body > nav .nav-summary {
   text-transform: uppercase;
   font-size: 0.78rem;
   letter-spacing: 1px;
-  transition: 0.3s;
+  transition: background-color 0.25s ease, color 0.25s ease;
   padding: 8px 10px;
   border-radius: 3px;
   cursor: pointer;
@@ -127,6 +145,13 @@ body > nav .nav-summary::marker { display: none; }
 body > nav .nav-summary:hover {
   color: #fff;
   background: rgba(255, 255, 255, 0.12);
+}
+
+body > nav .nav-summary:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  outline: 2px solid #44b651;
+  outline-offset: 3px;
 }
 
 /* Dropdown menu — absolute so it floats below without displacing phone CTA */
@@ -220,7 +245,7 @@ footer nav,
   border: none;
   cursor: pointer;
   padding: 6px;
-  z-index: 1100;
+  z-index: 1200;
 }
 
 .nav-hamburger span {
@@ -236,6 +261,13 @@ footer nav,
 .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Hamburger focus state */
+.nav-hamburger:focus-visible {
+  outline: 2px solid #44b651;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
 
 /* ─── Mobile ─────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
