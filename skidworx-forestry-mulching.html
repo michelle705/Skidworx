@@ -184,6 +184,9 @@
   <nav>
     <div class="container nav-flex">
       <a href="/" class="logo">SKIDWORX LLC</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="skidworx-forestry-mulching.html" class="active">Forestry Mulching</a>
@@ -428,5 +431,23 @@
     </div>
   </footer>
 
+
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle'),l=document.querySelector('.nav-links');
+  t.addEventListener('click',function(){
+    var o=l.classList.toggle('nav-open');
+    t.classList.toggle('open',o);
+    t.setAttribute('aria-expanded',String(o));
+  });
+  l.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      l.classList.remove('nav-open');
+      t.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+</script>
 </body>
 </html>

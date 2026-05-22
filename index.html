@@ -125,7 +125,7 @@
     }
     .logo-main{
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(4.5rem,11vw,8.5rem);
+      font-size:clamp(2rem,11vw,8.5rem);
       color:var(--g);
       letter-spacing:6px;
       text-shadow:0 0 40px rgba(68,182,81,0.25);
@@ -224,13 +224,12 @@
 
     @media(max-width:900px){.feature-grid{grid-template-columns:1fr;gap:40px}.faq-grid{grid-template-columns:1fr}}
     @media(max-width:768px){
-      .nav-flex{flex-direction:column;gap:14px}
-      .nav-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px}
-      .nav-links a{margin-left:0;font-size:0.72rem;padding:7px 9px}
-      .nav-links a.cta-link{margin-left:0}
       section{padding:75px 0}
-      .brand-box{padding:35px 40px}
+      .brand-box{padding:30px 28px}
       .footer-nav{gap:10px 14px}
+    }
+    @media(max-width:480px){
+      .brand-box{padding:24px 18px}
     }
   </style>
 </head>
@@ -241,6 +240,9 @@
   <nav>
     <div class="container nav-flex">
       <a href="/" class="logo">SKIDWORX LLC</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <div class="nav-links">
         <a href="/" class="active">Home</a>
         <a href="skidworx-forestry-mulching.html">Forestry Mulching</a>
@@ -462,5 +464,22 @@
     </div>
   </footer>
 
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle'),l=document.querySelector('.nav-links');
+  t.addEventListener('click',function(){
+    var o=l.classList.toggle('nav-open');
+    t.classList.toggle('open',o);
+    t.setAttribute('aria-expanded',String(o));
+  });
+  l.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      l.classList.remove('nav-open');
+      t.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+</script>
 </body>
 </html>
